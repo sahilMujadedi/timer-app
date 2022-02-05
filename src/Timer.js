@@ -31,7 +31,6 @@ const Timer = () => {
       hours = parseInt(hours)
       minutes= parseInt(minutes)
       seconds= parseInt(seconds)
-      // add one at the end to make up for flooring
       timeLeft = (hours*3600) + (minutes*60) + (seconds)
       setTimerIsSet(true)
     }
@@ -49,8 +48,12 @@ const Timer = () => {
     
   }
 
+  // runs when reset button is pressed, makes the displays 00 and allows input.
   const resetTimer = () => {
     setTimerIsSet(false)
+    setMinutesDisplay(padZeros(0))
+    setSecondsDisplay(padZeros(0))
+    setHoursDisplay(padZeros(0))
   }
 
   // if user types a bad input, this function fixes it.
@@ -71,14 +74,14 @@ const Timer = () => {
     
   }
 
-  // it actually just pads zeros on the back of the display states.
+  // calculates how many hours minutes and seconds there are to display it in a readable way.
   const makeTimeLeftPretty = () => {
     if (hours) {
       hoursDisplay = Math.floor(timeLeft/3600)
       setHoursDisplay(padZeros(hoursDisplay))
     }
     minutesDisplay = Math.floor((timeLeft % 3600) / 60)
-    secondsDisplay = Math.floor((timeLeft % 3600) % 60) + 1
+    secondsDisplay = Math.floor((timeLeft % 3600) % 60)
     
     setMinutesDisplay(padZeros(minutesDisplay))
     setSecondsDisplay(padZeros(secondsDisplay))
@@ -109,10 +112,9 @@ const Timer = () => {
     }
   }
 
-  // there's got to be a way to make these input fields less messy...
+  // TODO: make an input component...
   return (
     <div className="Timer">
-
       <p>{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
 
       {/* Only show the input fields on set up */}
