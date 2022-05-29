@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import TimerInputs from './TimerInputs'
 
 const Timer = () => {
   // states and variables //
@@ -55,25 +56,7 @@ const Timer = () => {
     setSecondsDisplay(padZeros(0))
     setHoursDisplay(padZeros(0))
   }
-
-  // if user types a bad input, this function fixes it.
-  const fixInputs = (inputFieldName) => {
-    if (inputFieldName === "hours") {
-      setHours(padZeros(hours))
-    } else if (inputFieldName === "minutes") {
-      setMinutes(padZeros(minutes))
-      if (minutes > 59) {
-        setMinutes(59)
-      }
-    } else {
-      setSeconds(padZeros(seconds))
-      if (seconds > 59) {
-        setSeconds(59)
-      }
-    }
-    
-  }
-
+  
   // calculates how many hours minutes and seconds there are to display it in a readable way.
   const makeTimeLeftPretty = () => {
     if (hours) {
@@ -95,65 +78,22 @@ const Timer = () => {
     }
     return s
   }
-
-  const handleInputClick = (e) => {
-    e.target.select()
-  }
-  const handleInputChange = (e, inputFieldName) => {
-    // Number(e.target.value) returns a number, if zero is returned, it is evaluated to be false, so we have to check if it's a zero to avoid this.
-    if (!Number(e.target.value) && Number(e.target.value) !== 0) {
-      return
-    } else if (inputFieldName === "minutes") {
-      setMinutes(e.target.value)
-    } else if (inputFieldName === "seconds") {
-      setSeconds(e.target.value)
-    } else {
-      setHours(e.target.value)
-    }
-  }
-
-  // TODO: make an input component...
+  
   return (
     <div className="Timer">
       <p>{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
 
-      {/* Only show the input fields on set up */}
-      {!timerIsSet && 
-        <>
-          <input
-            className="hour time-input"
-            placeholder="HH"
-            type="tel"
-            maxLength="2"
-            value={hours}
-            onChange={(e) => handleInputChange(e, "hours")}
-            onBlur={() => fixInputs("hours")}
-            onClick={handleInputClick}
-          ></input>
-          :
-          <input
-            className="minute time-input"
-            placeholder="MM"
-            type="tel"
-            maxLength="2"
-            value={minutes}
-            onChange={(e) => handleInputChange(e, "minutes")}
-            onBlur={() => fixInputs("minutes")}
-            onClick={handleInputClick}
-          ></input>
-          :
-          <input
-            className="second time-input"
-            placeholder="SS"
-            type="tel"
-            maxLength="2"
-            value={seconds}
-            onChange={(e) => handleInputChange(e, "seconds")}
-            onBlur={() => fixInputs("seconds")}
-            onClick={handleInputClick}
-          ></input> 
-        </>
-      }
+      <TimerInputs
+        seconds={seconds} 
+        setSeconds={setSeconds}
+        minutes={minutes}
+        setMinutes={setMinutes} 
+        hours={hours}
+        setHours={setHours}
+        padZeros={padZeros}
+        timerIsSet={timerIsSet}
+      />
+
       <button onClick={toggleTimer}>{timerGoing ? "Stop" : "Start"}</button>
       {!timerGoing && timerIsSet &&
         <button onClick={resetTimer}>Reset</button>
@@ -163,4 +103,4 @@ const Timer = () => {
   );
 }
 
-export default Timer;
+export default Timer
