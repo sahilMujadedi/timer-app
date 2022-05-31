@@ -10,7 +10,7 @@ const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours,
       if (minutes > 59) {
         setMinutes(59)
       }
-    } else {
+    } else if (inputFieldName === "seconds") {
       setSeconds(padZeros(seconds))
       if (seconds > 59) {
         setSeconds(59)
@@ -30,7 +30,7 @@ const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours,
       setMinutes(e.target.value)
     } else if (inputFieldName === "seconds") {
       setSeconds(e.target.value)
-    } else {
+    } else if (inputFieldName === "hours") {
       setHours(e.target.value)
     }
   }

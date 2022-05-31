@@ -13,6 +13,10 @@ const Timer = () => {
   let [timerGoing, setTimerGoing] = useState(false)
   let [timerIntervalID, setTimerIntervalID] = useState(null)
 
+  // shifts the timer so that when the timer displays 0 it ends rather than waiting to go past 0
+  // and also displays the input time instead of immediately going down a second.
+  const TIMESHIFT = 1;
+
   // display variables
   let [hoursDisplay, setHoursDisplay] = useState('00')
   let [minutesDisplay, setMinutesDisplay] = useState('00')
@@ -20,8 +24,6 @@ const Timer = () => {
 
   // variable to check if the timer has been set.
   let [timerIsSet, setTimerIsSet] = useState(false)
-
-  // ((hours*3600) + (minutes*60) + (seconds))
 
   // the meat of the timer
   // first checks if timer is set to see if it needs to reset the timeLeft
@@ -32,7 +34,7 @@ const Timer = () => {
       hours = parseInt(hours)
       minutes= parseInt(minutes)
       seconds= parseInt(seconds)
-      timeLeft = (hours*3600) + (minutes*60) + (seconds)
+      timeLeft = (hours*3600) + (minutes*60) + (seconds) + TIMESHIFT
       setTimerIsSet(true)
     }
     if (!timerGoing) {
