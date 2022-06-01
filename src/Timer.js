@@ -2,12 +2,22 @@ import { useState } from 'react'
 import TimerInputs from './TimerInputs'
 import './styles/Timer.css'
 
-const Timer = () => {
+const Timer = ({passedSeconds, passedMinutes, passedHours}) => {
+  
+  // makes H:M:S look like HH:MM:SS
+  const padZeros = (num) => {
+    let s = num.toString()
+    while (s.length < 2) {
+      s = "0" + s
+    }
+    return s
+  }
+
   // states and variables //
   // input variables
-  let [hours, setHours] = useState('00')
-  let [minutes, setMinutes] = useState('00')
-  let [seconds, setSeconds] = useState('00')
+  let [hours, setHours] = useState(padZeros(passedHours))
+  let [minutes, setMinutes] = useState(padZeros(passedMinutes))
+  let [seconds, setSeconds] = useState(padZeros(passedSeconds))
 
   // shifts the timer so that when the timer displays 0 it ends rather than waiting to go past 0
   // and also displays the input time instead of immediately going down a second.
@@ -87,14 +97,7 @@ const Timer = () => {
     setSecondsDisplay(padZeros(secondsDisplay))
   }
 
-  // makes H:M:S look like HH:MM:SS
-  const padZeros = (num) => {
-    let s = num.toString()
-    while (s.length < 2) {
-      s = "0" + s
-    }
-    return s
-  }
+  
 
   const timerFinished = () => {
     clearInterval(timerIntervalID)
@@ -133,6 +136,12 @@ const Timer = () => {
 
     </div>
   );
+}
+
+Timer.defaultProps = {
+  passedHours: 0,
+  passedMinutes: 1,
+  passedSeconds: 0
 }
 
 export default Timer

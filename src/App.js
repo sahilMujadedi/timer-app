@@ -1,10 +1,10 @@
-import Timer from './Timer'
+import Timers from './Timers'
 import './styles/App.css';
 
 function App() {
   return (
     <div className="App">
-      <Timer />
+      <Timers />
     </div>
   );
 }
