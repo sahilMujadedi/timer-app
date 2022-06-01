@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import TimerInputs from './TimerInputs'
+import './styles/Timer.css'
 
 const Timer = () => {
   // states and variables //
@@ -8,19 +9,21 @@ const Timer = () => {
   let [minutes, setMinutes] = useState('00')
   let [seconds, setSeconds] = useState('00')
 
-  // timer variables
-  let [timeLeft, setTimeLeft] = useState(0)
-  let [timerGoing, setTimerGoing] = useState(false)
-  let [timerIntervalID, setTimerIntervalID] = useState(null)
-
   // shifts the timer so that when the timer displays 0 it ends rather than waiting to go past 0
   // and also displays the input time instead of immediately going down a second.
   const TIMESHIFT = 1;
+
+  // behind the scenes timer variables
+  let [timeLeft, setTimeLeft] = useState(TIMESHIFT+1) // set to TIMESHIFT+1 so that timer does not finish when the page loads.
+  let [timerGoing, setTimerGoing] = useState(false)
+  let [timerIntervalID, setTimerIntervalID] = useState(null)
 
   // display variables
   let [hoursDisplay, setHoursDisplay] = useState('00')
   let [minutesDisplay, setMinutesDisplay] = useState('00')
   let [secondsDisplay, setSecondsDisplay] = useState('00')
+
+  let [timerDisplayStyle, setTimerDisplayStyle] = useState('timer-display')
 
   // variable to check if the timer has been set.
   let [timerIsSet, setTimerIsSet] = useState(false)
@@ -72,7 +75,7 @@ const Timer = () => {
     setSecondsDisplay(padZeros(secondsDisplay))
   }
 
-  // makes H:M:S look like HH:MM:SS, just to look nicer.
+  // makes H:M:S look like HH:MM:SS
   const padZeros = (num) => {
     let s = num.toString()
     while (s.length < 2) {
@@ -80,10 +83,22 @@ const Timer = () => {
     }
     return s
   }
+
+  const timerFinished = () => {
+    resetTimer()
+    clearInterval(timerIntervalID)
+    setTimeLeft(TIMESHIFT+1)
+    setTimerDisplayStyle(timerDisplayStyle += ' timer-display-finished')
+    console.log('timerfinished')
+  }
   
   return (
     <div className="Timer">
-      <p>{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
+      {timeLeft > TIMESHIFT
+        ? <p className={timerDisplayStyle}>{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
+        : timerFinished()
+      }
+      
 
       <TimerInputs
         seconds={seconds} 
