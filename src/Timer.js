@@ -11,17 +11,20 @@ const Timer = () => {
 
   // shifts the timer so that when the timer displays 0 it ends rather than waiting to go past 0
   // and also displays the input time instead of immediately going down a second.
-  const TIMESHIFT = 1;
+  const TIMESHIFT = 1000;
 
   // behind the scenes timer variables
-  let [timeLeft, setTimeLeft] = useState(TIMESHIFT+1) // set to TIMESHIFT+1 so that timer does not finish when the page loads.
+  let [timeLeft, setTimeLeft] = useState(TIMESHIFT*2) // set so that timer does not finish when the page loads.
   let [timerGoing, setTimerGoing] = useState(false)
   let [timerIntervalID, setTimerIntervalID] = useState(null)
+
+  let lastUpdate = new Date().getTime()
 
   // display variables
   let [hoursDisplay, setHoursDisplay] = useState('00')
   let [minutesDisplay, setMinutesDisplay] = useState('00')
   let [secondsDisplay, setSecondsDisplay] = useState('00')
+  let [finishedFlag, setFinishedFlag] = useState(false)
 
   let [timerDisplayStyle, setTimerDisplayStyle] = useState('timer-display')
 
@@ -37,15 +40,21 @@ const Timer = () => {
       hours = parseInt(hours)
       minutes= parseInt(minutes)
       seconds= parseInt(seconds)
-      timeLeft = (hours*3600) + (minutes*60) + (seconds) + TIMESHIFT
+
+      timeLeft = (((hours*3600) + (minutes*60) + (seconds)) * 1000) + TIMESHIFT // timeLeft will be in milliseconds
       setTimerIsSet(true)
     }
     if (!timerGoing) {
+      lastUpdate = new Date().getTime()
       setTimerGoing(true)
+
       setTimerIntervalID(setInterval(() => {
-        timeLeft -= 0.1
+        timeLeft -= new Date().getTime() - lastUpdate
+
         setTimeLeft(timeLeft)
         makeTimeLeftPretty()
+
+        lastUpdate = new Date().getTime()
       }, 100))
     } else if (timerGoing) {
       setTimerGoing(false)
@@ -56,7 +65,10 @@ const Timer = () => {
 
   // runs when reset button is pressed, makes the displays 00 and allows input.
   const resetTimer = () => {
+    setTimerGoing(false)
     setTimerIsSet(false)
+    setTimerDisplayStyle('timer-display')
+    setFinishedFlag(false)
     setMinutesDisplay(padZeros(0))
     setSecondsDisplay(padZeros(0))
     setHoursDisplay(padZeros(0))
@@ -65,11 +77,11 @@ const Timer = () => {
   // calculates how many hours minutes and seconds there are to display it in a readable way.
   const makeTimeLeftPretty = () => {
     if (hours) {
-      hoursDisplay = Math.floor(timeLeft/3600)
+      hoursDisplay = Math.floor((timeLeft / 1000)/3600)
       setHoursDisplay(padZeros(hoursDisplay))
     }
-    minutesDisplay = Math.floor((timeLeft % 3600) / 60)
-    secondsDisplay = Math.floor((timeLeft % 3600) % 60)
+    minutesDisplay = Math.floor(((timeLeft / 1000) % 3600) / 60)
+    secondsDisplay = Math.floor(((timeLeft / 1000) % 3600) % 60)
     
     setMinutesDisplay(padZeros(minutesDisplay))
     setSecondsDisplay(padZeros(secondsDisplay))
@@ -85,9 +97,10 @@ const Timer = () => {
   }
 
   const timerFinished = () => {
-    resetTimer()
     clearInterval(timerIntervalID)
-    setTimeLeft(TIMESHIFT+1)
+    setFinishedFlag(true)
+    setTimerGoing(false)
+    setTimeLeft(TIMESHIFT*2)
     setTimerDisplayStyle(timerDisplayStyle += ' timer-display-finished')
     console.log('timerfinished')
   }
@@ -110,8 +123,10 @@ const Timer = () => {
         padZeros={padZeros}
         timerIsSet={timerIsSet}
       />
-
-      <button onClick={toggleTimer}>{timerGoing ? "Stop" : "Start"}</button>
+      {!finishedFlag &&
+        <button onClick={toggleTimer}>{timerGoing ? "Stop" : "Start"}</button>
+      }
+      
       {!timerGoing && timerIsSet &&
         <button onClick={resetTimer}>Reset</button>
       }
