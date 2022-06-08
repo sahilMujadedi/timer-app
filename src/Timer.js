@@ -134,6 +134,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours}) => {
         <button onClick={resetTimer}>Reset</button>
       }
 
+      <button>Delete</button>
     </div>
   );
 }
