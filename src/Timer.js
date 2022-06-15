@@ -2,7 +2,7 @@ import { useState } from 'react'
 import TimerInputs from './TimerInputs'
 import './styles/Timer.css'
 
-const Timer = ({passedSeconds, passedMinutes, passedHours}) => {
+const Timer = ({passedSeconds, passedMinutes, passedHours, deleteTimer, id}) => {
   
   // makes H:M:S look like HH:MM:SS
   const padZeros = (num) => {
@@ -73,17 +73,6 @@ const Timer = ({passedSeconds, passedMinutes, passedHours}) => {
     
   }
 
-  // runs when reset button is pressed, makes the displays 00 and allows input.
-  const resetTimer = () => {
-    setTimerGoing(false)
-    setTimerIsSet(false)
-    setTimerDisplayStyle('timer-display')
-    setFinishedFlag(false)
-    setMinutesDisplay(padZeros(0))
-    setSecondsDisplay(padZeros(0))
-    setHoursDisplay(padZeros(0))
-  }
-  
   // calculates how many hours minutes and seconds there are to display it in a readable way.
   const makeTimeLeftPretty = () => {
     if (hours) {
@@ -97,7 +86,16 @@ const Timer = ({passedSeconds, passedMinutes, passedHours}) => {
     setSecondsDisplay(padZeros(secondsDisplay))
   }
 
-  
+  // runs when reset button is pressed, makes the displays 00 and allows input.
+  const resetTimer = () => {
+    setTimerGoing(false)
+    setTimerIsSet(false)
+    setTimerDisplayStyle('timer-display')
+    setFinishedFlag(false)
+    setMinutesDisplay(padZeros(0))
+    setSecondsDisplay(padZeros(0))
+    setHoursDisplay(padZeros(0))
+  }
 
   const timerFinished = () => {
     clearInterval(timerIntervalID)
@@ -107,6 +105,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours}) => {
     setTimerDisplayStyle(timerDisplayStyle += ' timer-display-finished')
     console.log('timerfinished')
   }
+
   
   return (
     <div className="Timer">
@@ -134,7 +133,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours}) => {
         <button onClick={resetTimer}>Reset</button>
       }
 
-      <button>Delete</button>
+      <button onClick={() => deleteTimer(id)}>Delete</button>
     </div>
   );
 }
