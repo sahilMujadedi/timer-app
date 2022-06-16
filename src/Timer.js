@@ -132,8 +132,9 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, deleteTimer, id}) => 
       {!timerGoing && timerIsSet &&
         <button onClick={resetTimer}>Reset</button>
       }
-
-      <button onClick={() => deleteTimer(id)}>Delete</button>
+      {!timerIsSet && 
+        <button onClick={() => deleteTimer(id)}>Delete</button>
+      }
     </div>
   );
 }
