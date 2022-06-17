@@ -2,7 +2,7 @@ import { useState } from 'react'
 import TimerInputs from './TimerInputs'
 import './styles/Timer.css'
 
-const Timer = ({passedSeconds, passedMinutes, passedHours, deleteTimer, id}) => {
+const Timer = ({passedSeconds, passedMinutes, passedHours, timerChangeHandler, deleteTimer, id}) => {
   
   // makes H:M:S look like HH:MM:SS
   const padZeros = (num) => {
@@ -122,7 +122,9 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, deleteTimer, id}) => 
         setMinutes={setMinutes} 
         hours={hours}
         setHours={setHours}
+        id={id}
         padZeros={padZeros}
+        timerChangeHandler={timerChangeHandler}
         timerIsSet={timerIsSet}
       />
       {!finishedFlag &&

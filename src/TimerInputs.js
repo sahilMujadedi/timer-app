@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours, padZeros, timerIsSet}) => {
+const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours, id, padZeros, timerChangeHandler, timerIsSet}) => {
   // if user types a bad input, this function fixes it.
   const fixInputs = (inputFieldName) => {
     if (inputFieldName === "hours") {
@@ -16,7 +16,7 @@ const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours,
         setSeconds(59)
       }
     }
-    
+    timerChangeHandler(id, Number(seconds), Number(minutes), Number(hours))
   }
 
   const handleInputClick = (e) => {
@@ -33,6 +33,7 @@ const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours,
     } else if (inputFieldName === "hours") {
       setHours(e.target.value)
     }
+
   }
 
   return(
