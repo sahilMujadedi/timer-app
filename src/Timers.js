@@ -28,6 +28,12 @@ const Timers = () => {
   }
 
   const timerChangeHandler = (id, sec, min, hr) => {
+    if (sec > 59) {
+      sec = 59
+    }
+    if (min > 59) {
+      min = 59
+    }
     for (let i = 0; i < savedTimers.length; i++) {
       if (savedTimers[i].id === id) {
         savedTimers[i].seconds = sec
