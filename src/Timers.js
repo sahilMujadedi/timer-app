@@ -1,19 +1,37 @@
-import { useState } from 'react'
+import { useState, useLayoutEffect } from 'react'
 import Timer from './Timer'
 
 const Timers = () => {
 
   // TODO: don't forget to also save ID into local storage and grab from local storage.
   let [id, setId] = useState(0)
-  let [savedTimers, setSavedTimers] = useState([
-    {id: id, seconds: 5, minutes: 0, hours: 0}
-  ])
+  let [savedTimers, setSavedTimers] = useState([])
+
+  const saveTimers = () => {
+    localStorage.setItem("localStoredTimers", JSON.stringify(savedTimers))
+  }
+  const loadTimers = () => {
+    if (localStorage.getItem("localStoredTimers") && 
+        JSON.parse(localStorage.getItem("localStoredTimers")).length > 0) {
+      savedTimers = JSON.parse(localStorage.getItem("localStoredTimers"))
+    } else {
+      savedTimers = [
+        {id: 0, seconds: 0, minutes: 1, hours: 0}
+      ]
+    }
+
+    setSavedTimers(savedTimers)
+
+    id = savedTimers[savedTimers.length-1].id
+    setId(id)
+  }
   
   const addNewTimer = () => {
     id++
     setId(id)
-    savedTimers.push({id: id, seconds: 5, minutes: 0, hours: 0})
+    savedTimers.push({id: id, seconds: 0, minutes: 1, hours: 0})
     setSavedTimers(savedTimers)
+    saveTimers()
   }
   const deleteTimer = (id) => {
     // for some reason page does not re-render unless .slice() is used
@@ -25,6 +43,7 @@ const Timers = () => {
       }
     }
     setSavedTimers(savedTimers)
+    saveTimers()
   }
 
   const timerChangeHandler = (id, sec, min, hr) => {
@@ -43,7 +62,12 @@ const Timers = () => {
       }
     }
     setSavedTimers(savedTimers)
+    saveTimers()
   }
+
+  useLayoutEffect(() => {
+    loadTimers()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return ( 
     <>
@@ -56,5 +80,6 @@ const Timers = () => {
     </>
   );
 }
- 
+
 export default Timers;
+
