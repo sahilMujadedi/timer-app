@@ -41,6 +41,9 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, timerChangeHandler, d
   // variable to check if the timer has been set.
   let [timerIsSet, setTimerIsSet] = useState(false)
 
+  // progress bar variable
+  let [initialTimeLeft, setInitialTimeLeft] = useState(0)
+
   // the meat of the timer
   // first checks if timer is set to see if it needs to reset the timeLeft
   // if the timer was not going when function was run, make it start going
@@ -52,7 +55,10 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, timerChangeHandler, d
       seconds= parseInt(seconds)
 
       timeLeft = (((hours*3600) + (minutes*60) + (seconds)) * 1000) + TIMESHIFT // timeLeft will be in milliseconds
+      initialTimeLeft = timeLeft
+      setInitialTimeLeft(initialTimeLeft)
       setTimerIsSet(true)
+      setTimeLeft(timeLeft)
     }
     if (!timerGoing) {
       lastUpdate = new Date().getTime()
@@ -101,7 +107,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, timerChangeHandler, d
     clearInterval(timerIntervalID)
     setFinishedFlag(true)
     setTimerGoing(false)
-    setTimeLeft(TIMESHIFT*2)
+    setTimeLeft(TIMESHIFT+1)
     setTimerDisplayStyle(timerDisplayStyle += ' timer-display-finished')
     console.log('timerfinished')
   }
@@ -127,6 +133,12 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, timerChangeHandler, d
         timerChangeHandler={timerChangeHandler}
         timerIsSet={timerIsSet}
       />
+
+      <div className='progress-bar'>
+        <progress value={timerIsSet ? initialTimeLeft - timeLeft : 0} max={initialTimeLeft - TIMESHIFT}/>
+      </div>
+       
+      
       {!finishedFlag &&
         <button onClick={toggleTimer}>{timerGoing ? "Stop" : "Start"}</button>
       }
