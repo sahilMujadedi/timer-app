@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours, id, padZeros, timerChangeHandler, timerIsSet}) => {
   // if user types a bad input, this function fixes it.
   const fixInputs = (inputFieldName) => {
