@@ -4,6 +4,10 @@ This is a timer web-app created using React, created both for myself and to lear
 Currently in the very early phases...
 ![Screenshot of timer-app](public/README.png "timer-app")
 
+## Features:
+- Multiple timers
+- Automatic saving of timer data
+
 ## To run locally:
 Have npm installed.
 
