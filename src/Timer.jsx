@@ -2,7 +2,7 @@ import { useState } from 'react'
 import TimerInputs from './TimerInputs'
 import './styles/Timer.css'
 
-const Timer = ({passedSeconds, passedMinutes, passedHours, timerChangeHandler, deleteTimer, id}) => {
+const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChangeHandler, deleteTimer, id}) => {
   
   // makes H:M:S look like HH:MM:SS
   const padZeros = (num) => {
@@ -18,6 +18,8 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, timerChangeHandler, d
   let [hours, setHours] = useState(padZeros(passedHours))
   let [minutes, setMinutes] = useState(padZeros(passedMinutes))
   let [seconds, setSeconds] = useState(padZeros(passedSeconds))
+
+  let [timerName, setTimerName] = useState(passedName)
 
   // shifts the timer so that when the timer displays 0 it ends rather than waiting to go past 0
   // and also displays the input time instead of immediately going down a second.
@@ -114,7 +116,11 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, timerChangeHandler, d
 
   
   return (
-    <div className="Timer">
+    <div className="timer">
+      <input type="text" value={timerName} placeholder="Timer Name" onChange={(e) => {
+        timerChangeHandler(id, seconds, minutes, hours, e.target.value)
+        setTimerName(e.target.value)
+      }}/>
       {timeLeft > TIMESHIFT
         ? <p className={timerDisplayStyle}>{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
         : timerFinished()
@@ -129,13 +135,14 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, timerChangeHandler, d
         hours={hours}
         setHours={setHours}
         id={id}
+        timerName={timerName}
         padZeros={padZeros}
         timerChangeHandler={timerChangeHandler}
         timerIsSet={timerIsSet}
       />
 
       <div className='progress-bar'>
-        <progress value={timerIsSet ? initialTimeLeft - timeLeft : 0} max={initialTimeLeft - TIMESHIFT}/>
+        <progress value={timerIsSet ? initialTimeLeft - timeLeft : 0} max={initialTimeLeft - TIMESHIFT} />
       </div>
        
       

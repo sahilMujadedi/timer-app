@@ -1,4 +1,4 @@
-const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours, id, padZeros, timerChangeHandler, timerIsSet}) => {
+const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours, id, timerName, padZeros, timerChangeHandler, timerIsSet}) => {
   // if user types a bad input, this function fixes it.
   const fixInputs = (inputFieldName) => {
     if (inputFieldName === "hours") {
@@ -14,7 +14,7 @@ const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours,
         setSeconds(59)
       }
     }
-    timerChangeHandler(id, Number(seconds), Number(minutes), Number(hours))
+    timerChangeHandler(id, Number(seconds), Number(minutes), Number(hours), timerName)
   }
 
   const handleInputClick = (e) => {

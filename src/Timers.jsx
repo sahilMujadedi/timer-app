@@ -3,7 +3,6 @@ import Timer from './Timer'
 
 const Timers = () => {
 
-  // TODO: don't forget to also save ID into local storage and grab from local storage.
   let [id, setId] = useState(0)
   let [savedTimers, setSavedTimers] = useState([])
 
@@ -16,7 +15,7 @@ const Timers = () => {
       savedTimers = JSON.parse(localStorage.getItem("localStoredTimers"))
     } else {
       savedTimers = [
-        {id: 0, seconds: 0, minutes: 1, hours: 0}
+        {id: 0, seconds: 0, minutes: 1, hours: 0, timerName: ""}
       ]
     }
 
@@ -29,7 +28,7 @@ const Timers = () => {
   const addNewTimer = () => {
     id++
     setId(id)
-    savedTimers.push({id: id, seconds: 0, minutes: 1, hours: 0})
+    savedTimers.push({id: id, seconds: 0, minutes: 1, hours: 0, timerName: ""})
     setSavedTimers(savedTimers)
     saveTimers()
   }
@@ -46,7 +45,7 @@ const Timers = () => {
     saveTimers()
   }
 
-  const timerChangeHandler = (id, sec, min, hr) => {
+  const timerChangeHandler = (id, sec, min, hr, timerName) => {
     if (sec > 59) {
       sec = 59
     }
@@ -58,6 +57,7 @@ const Timers = () => {
         savedTimers[i].seconds = sec
         savedTimers[i].minutes = min
         savedTimers[i].hours = hr
+        savedTimers[i].timerName = timerName
         break
       }
     }
@@ -73,7 +73,15 @@ const Timers = () => {
     <>
       {
         savedTimers.map((timer) => {
-          return (<Timer passedSeconds={timer.seconds} passedMinutes={timer.minutes} passedHours={timer.hours} deleteTimer={deleteTimer} timerChangeHandler={timerChangeHandler} id={timer.id} key={timer.id}/>)
+          return (<Timer 
+            passedSeconds={timer.seconds} 
+            passedMinutes={timer.minutes} 
+            passedHours={timer.hours} 
+            passedName={timer.timerName} 
+            deleteTimer={deleteTimer} 
+            timerChangeHandler={timerChangeHandler} 
+            id={timer.id} 
+            key={timer.id}/>)
         })
       }
       <button onClick={addNewTimer}>New Timer</button>
