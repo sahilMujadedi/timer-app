@@ -9,6 +9,7 @@ This is a timer web-app created using React, created both for myself and to lear
 ## Features:
 - Multiple timers
 - Automatic saving of timer data
+- Progress Bar
 
 ## To run locally:
 Have npm installed.
