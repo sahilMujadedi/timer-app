@@ -56,6 +56,11 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
       minutes= parseInt(minutes)
       seconds= parseInt(seconds)
 
+      // set displays here to avoid the flicker between 00:00:00 and the time that was input
+      setHoursDisplay(padZeros(hours))
+      setMinutesDisplay(padZeros(minutes))
+      setSecondsDisplay(padZeros(seconds))
+
       timeLeft = (((hours*3600) + (minutes*60) + (seconds)) * 1000) + TIMESHIFT // timeLeft will be in milliseconds
       initialTimeLeft = timeLeft
       setInitialTimeLeft(initialTimeLeft)
@@ -67,6 +72,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
       setTimerGoing(true)
 
       setTimerIntervalID(setInterval(() => {
+
         timeLeft -= new Date().getTime() - lastUpdate
 
         setTimeLeft(timeLeft)
@@ -83,13 +89,11 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
 
   // calculates how many hours minutes and seconds there are to display it in a readable way.
   const makeTimeLeftPretty = () => {
-    if (hours) {
-      hoursDisplay = Math.floor((timeLeft / 1000)/3600)
-      setHoursDisplay(padZeros(hoursDisplay))
-    }
     minutesDisplay = Math.floor(((timeLeft / 1000) % 3600) / 60)
     secondsDisplay = Math.floor(((timeLeft / 1000) % 3600) % 60)
-    
+    hoursDisplay = Math.floor((timeLeft / 1000)/3600)
+
+    setHoursDisplay(padZeros(hoursDisplay))
     setMinutesDisplay(padZeros(minutesDisplay))
     setSecondsDisplay(padZeros(secondsDisplay))
   }
@@ -121,9 +125,14 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
         timerChangeHandler(id, seconds, minutes, hours, e.target.value)
         setTimerName(e.target.value)
       }}/>
-      {timeLeft > TIMESHIFT
-        ? <p className={timerDisplayStyle}>{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
-        : timerFinished()
+
+      {timerIsSet &&
+        <span>
+          {timeLeft > TIMESHIFT
+            ? <p className={timerDisplayStyle}>{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
+            : timerFinished()
+          }
+        </span>
       }
       
 
@@ -158,12 +167,6 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
       }
     </div>
   );
-}
-
-Timer.defaultProps = {
-  passedHours: 0,
-  passedMinutes: 1,
-  passedSeconds: 0
 }
 
 export default Timer
