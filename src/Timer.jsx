@@ -121,50 +121,63 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
   
   return (
     <div className="timer">
-      <input type="text" value={timerName} placeholder="Timer Name" onChange={(e) => {
-        timerChangeHandler(id, seconds, minutes, hours, e.target.value)
-        setTimerName(e.target.value)
-      }}/>
+      <div className="upper-timer">
+        {/* timer name */}
+        <input type="text" value={timerName} placeholder="Timer Name" onChange={(e) => {
+          timerChangeHandler(id, seconds, minutes, hours, e.target.value)
+          setTimerName(e.target.value)
+        }}/>
+        
 
-      {timerIsSet &&
-        <span>
-          {timeLeft > TIMESHIFT
-            ? <p className={timerDisplayStyle}>{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
-            : timerFinished()
-          }
-        </span>
-      }
+        {/* delete and reset buttons */}
+        {!timerIsSet && 
+          <button onClick={() => deleteTimer(id)}>Delete</button>
+        }
+        {!timerGoing && timerIsSet &&
+          <button onClick={resetTimer}>Reset</button>
+        }
+      </div>
+
+      {/* start/stop button */}
+      <div className="timer-toggle">
+        {!finishedFlag 
+          ? <button onClick={toggleTimer}>{timerGoing ? "Stop" : "Start"}</button>
+          : <button onClick={resetTimer}>Reset</button>
+        }
+      </div>
+      
       
 
-      <TimerInputs
-        seconds={seconds} 
-        setSeconds={setSeconds}
-        minutes={minutes}
-        setMinutes={setMinutes} 
-        hours={hours}
-        setHours={setHours}
-        id={id}
-        timerName={timerName}
-        padZeros={padZeros}
-        timerChangeHandler={timerChangeHandler}
-        timerIsSet={timerIsSet}
-      />
-
+      {/* progress bar */}
       <div className='progress-bar'>
         <progress value={timerIsSet ? initialTimeLeft - timeLeft : 0} max={initialTimeLeft - TIMESHIFT} />
       </div>
-       
-      
-      {!finishedFlag &&
-        <button onClick={toggleTimer}>{timerGoing ? "Stop" : "Start"}</button>
-      }
-      
-      {!timerGoing && timerIsSet &&
-        <button onClick={resetTimer}>Reset</button>
-      }
-      {!timerIsSet && 
-        <button onClick={() => deleteTimer(id)}>Delete</button>
-      }
+
+      <div className="lower-timer">
+        {/* timer and input */}
+        {timerIsSet &&
+          <span>
+            {timeLeft > TIMESHIFT
+              ? <p className={timerDisplayStyle}>{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
+              : timerFinished()
+            }
+          </span>
+        }
+        <TimerInputs
+          seconds={seconds} 
+          setSeconds={setSeconds}
+          minutes={minutes}
+          setMinutes={setMinutes} 
+          hours={hours}
+          setHours={setHours}
+          id={id}
+          timerName={timerName}
+          padZeros={padZeros}
+          timerChangeHandler={timerChangeHandler}
+          timerIsSet={timerIsSet}
+        />
+      </div>
+
     </div>
   );
 }
