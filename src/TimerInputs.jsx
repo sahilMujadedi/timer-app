@@ -1,4 +1,4 @@
-const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours, id, timerName, padZeros, timerChangeHandler, timerIsSet}) => {
+const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours, id, timerName, padZeros, timerChangeHandler, timerIsSet, toggleTimer}) => {
   // if user types a bad input, this function fixes it.
   const fixInputs = (inputFieldName) => {
     if (inputFieldName === "hours") {
@@ -34,6 +34,12 @@ const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours,
 
   }
 
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      toggleTimer()
+    }
+  }
+
   return(
     <div className="inputFields">
       {/* Only show the input fields on set up */}
@@ -48,6 +54,7 @@ const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours,
             onChange={(e) => handleInputChange(e, "hours")}
             onBlur={() => fixInputs("hours")}
             onClick={handleInputClick}
+            onKeyPress={(e) => handleEnter(e)}
           ></input>
           :
           <input
@@ -59,6 +66,7 @@ const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours,
             onChange={(e) => handleInputChange(e, "minutes")}
             onBlur={() => fixInputs("minutes")}
             onClick={handleInputClick}
+            onKeyPress={(e) => handleEnter(e)}
           ></input>
           :
           <input
@@ -70,6 +78,7 @@ const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours,
             onChange={(e) => handleInputChange(e, "seconds")}
             onBlur={() => fixInputs("seconds")}
             onClick={handleInputClick}
+            onKeyPress={(e) => handleEnter(e)}
           ></input> 
         </>
     }

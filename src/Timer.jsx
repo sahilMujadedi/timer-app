@@ -175,6 +175,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
           padZeros={padZeros}
           timerChangeHandler={timerChangeHandler}
           timerIsSet={timerIsSet}
+          toggleTimer={toggleTimer}
         />
       </div>
 
