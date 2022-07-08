@@ -120,7 +120,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
 
   
   return (
-    <div className="timer">
+    <div className="timer tile">
       <div className="upper-timer">
         {/* timer name */}
         <input type="text" value={timerName} placeholder="Timer Name" onChange={(e) => {
@@ -131,18 +131,18 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
 
         {/* delete and reset buttons */}
         {!timerIsSet && 
-          <button onClick={() => deleteTimer(id)}>Delete</button>
+          <button onClick={() => deleteTimer(id)} className="flt-right pointer">Delete</button>
         }
         {!timerGoing && timerIsSet &&
-          <button onClick={resetTimer}>Reset</button>
+          <button onClick={resetTimer} className="flt-right pointer">Reset</button>
         }
       </div>
 
       {/* start/stop button */}
       <div className="timer-toggle">
         {!finishedFlag 
-          ? <button onClick={toggleTimer}>{timerGoing ? "Stop" : "Start"}</button>
-          : <button onClick={resetTimer}>Reset</button>
+          ? <button onClick={toggleTimer} className="pointer">{timerGoing ? "Stop" : "Start"}</button>
+          : <button onClick={resetTimer} className="pointer">Reset</button>
         }
       </div>
       

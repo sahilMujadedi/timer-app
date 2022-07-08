@@ -1,0 +1,21 @@
+.timers {
+  max-width: 97%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.add-button-container {
+  display: block;
+  width: 140px;
+  height: 140px;
+  border: none;
+  float: left;
+}
+.add-button {
+  width: 100%;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  font-size: 1em;
+  line-height: 140px;
+  cursor: pointer;
+}

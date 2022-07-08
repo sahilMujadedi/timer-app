@@ -1,5 +1,6 @@
 import { useState, useLayoutEffect } from 'react'
 import Timer from './Timer'
+import './styles/Timers.css'
 
 const Timers = () => {
 
@@ -70,7 +71,7 @@ const Timers = () => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return ( 
-    <>
+    <div className="timers">
       {
         savedTimers.map((timer) => {
           return (<Timer 
@@ -84,8 +85,11 @@ const Timers = () => {
             key={timer.id}/>)
         })
       }
-      <button onClick={addNewTimer}>New Timer</button>
-    </>
+      <div className="add-button-container">
+        <button onClick={addNewTimer} class="add-button tile pointer">New Timer</button>
+      </div>
+      
+    </div>
   );
 }
 

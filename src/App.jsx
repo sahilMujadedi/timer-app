@@ -4,7 +4,9 @@ import './styles/App.css';
 function App() {
   return (
     <div className="App">
-      <Timers />
+      <div className="timers">
+        <Timers />
+      </div>
     </div>
   );
 }

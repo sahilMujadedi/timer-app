@@ -1,0 +1,11 @@
+body {
+  margin: 0 auto;
+  padding: 0;
+}
+.tile {
+  margin: 5px;
+}
+
+.pointer {
+  cursor: pointer;
+}
