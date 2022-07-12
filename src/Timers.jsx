@@ -71,24 +71,27 @@ const Timers = () => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return ( 
-    <div className="timers">
-      {
-        savedTimers.map((timer) => {
-          return (<Timer 
-            passedSeconds={timer.seconds} 
-            passedMinutes={timer.minutes} 
-            passedHours={timer.hours} 
-            passedName={timer.timerName} 
-            deleteTimer={deleteTimer} 
-            timerChangeHandler={timerChangeHandler} 
-            id={timer.id} 
-            key={timer.id}/>)
-        })
-      }
-      <div className="add-button-container">
-        <button onClick={addNewTimer} class="add-button tile pointer">New Timer</button>
-      </div>
+    <div className="tiles">
       
+        {
+          savedTimers.map((timer) => {
+            return (<Timer 
+              passedSeconds={timer.seconds} 
+              passedMinutes={timer.minutes} 
+              passedHours={timer.hours} 
+              passedName={timer.timerName} 
+              deleteTimer={deleteTimer} 
+              timerChangeHandler={timerChangeHandler} 
+              id={timer.id} 
+              key={timer.id}/>)
+          })
+        }
+      
+
+      
+      <button onClick={addNewTimer} className="add-button tile pointer">New Timer</button>
+      
+
     </div>
   );
 }

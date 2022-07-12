@@ -1,10 +1,7 @@
 .timer {
   border: 3px solid black;
   position: relative;
-  width: 305px;
-  height: 140px;
   display: block;
-  float: left;
 }
 .timer-display-finished {
   color: limegreen;
