@@ -1,5 +1,6 @@
 import { useState, useLayoutEffect } from 'react'
 import Timer from './Timer'
+import {FaPlus} from 'react-icons/fa'
 import './styles/Timers.css'
 
 const Timers = () => {
@@ -89,7 +90,7 @@ const Timers = () => {
       
 
       
-      <button onClick={addNewTimer} className="add-button tile pointer">New Timer</button>
+      <button onClick={addNewTimer} className="add-button tile pointer"><FaPlus /></button>
       
 
     </div>

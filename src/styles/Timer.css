@@ -1,8 +1,57 @@
 .timer {
-  border: 3px solid black;
   position: relative;
   display: block;
+  padding: 1rem;
 }
+
+.upper-timer {
+  
+}
+
+.name-input {
+  padding: 0.5em 0;
+}
+.upper-button {
+  font-size: 1.5em;
+  font-weight: bolder;
+  color: grey;
+  border: none;
+  background-color: inherit;
+  line-height: 1em;
+}
+
+.upper-button:hover {
+  color: white;
+}
+
+.delete-button {
+  font-size: 1.75em;
+  line-height: 0;
+  padding: 0;
+}
+
+.middle-timer {
+  margin: 1em;
+}
+
+.timer-toggle {
+  font-size: 3em;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+  width: min-content;
+  padding: 0.3em;
+  border-radius: 50%;
+}
+
+.middle-timer, .lower-timer {
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%; 
+}
+
 .timer-display-finished {
   color: limegreen;
 }

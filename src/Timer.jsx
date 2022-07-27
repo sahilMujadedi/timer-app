@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import TimerInputs from './TimerInputs'
+import {FaPause, FaPlay, FaUndoAlt, FaTimes} from 'react-icons/fa'
 import './styles/Timer.css'
 
 const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChangeHandler, deleteTimer, id}) => {
@@ -123,7 +124,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
     <div className="timer tile">
       <div className="upper-timer">
         {/* timer name */}
-        <input type="text" value={timerName} placeholder="Timer Name" onChange={(e) => {
+        <input type="text" value={timerName} placeholder="Timer Name" className="name-input" onChange={(e) => {
           timerChangeHandler(id, seconds, minutes, hours, e.target.value)
           setTimerName(e.target.value)
         }}/>
@@ -131,26 +132,28 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
 
         {/* delete and reset buttons */}
         {!timerIsSet && 
-          <button onClick={() => deleteTimer(id)} className="flt-right pointer">Delete</button>
+          <button onClick={() => deleteTimer(id)} className="delete-button flt-right pointer upper-button"><FaTimes /></button>
         }
         {!timerGoing && timerIsSet &&
-          <button onClick={resetTimer} className="flt-right pointer">Reset</button>
-        }
-      </div>
-
-      {/* start/stop button */}
-      <div className="timer-toggle">
-        {!finishedFlag 
-          ? <button onClick={toggleTimer} className="pointer">{timerGoing ? "Stop" : "Start"}</button>
-          : <button onClick={resetTimer} className="pointer">Reset</button>
+          <button onClick={resetTimer} className="reset-button flt-right pointer upper-button"><FaUndoAlt /></button>
         }
       </div>
       
-      
+      <div className="middle-timer">
+        {/* start/stop button */}
+        <div className="timer-toggle-container">
+          {!finishedFlag 
+            ? <button onClick={toggleTimer} className="timer-toggle pointer">{timerGoing ? <FaPause /> : <FaPlay />}</button>
+            : <button onClick={resetTimer} className="timer-toggle pointer"><FaUndoAlt /></button>
+          }
+        </div>
+        
+        
 
-      {/* progress bar */}
-      <div className='progress-bar'>
-        <progress value={timerIsSet ? initialTimeLeft - timeLeft : 0} max={initialTimeLeft - TIMESHIFT} />
+        {/* progress bar */}
+        <div className='progress-bar-container'>
+          <progress value={timerIsSet ? initialTimeLeft - timeLeft : 0} max={initialTimeLeft - TIMESHIFT} className="progress-bar" />
+        </div>
       </div>
 
       <div className="lower-timer">

@@ -1,3 +1,5 @@
+import './styles/TimerInputs.css'
+
 const TimerInputs = ({seconds, setSeconds, minutes, setMinutes, hours, setHours, id, timerName, padZeros, timerChangeHandler, timerIsSet, toggleTimer}) => {
   // if user types a bad input, this function fixes it.
   const fixInputs = (inputFieldName) => {
