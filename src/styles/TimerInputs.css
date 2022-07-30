@@ -1,6 +1,8 @@
 .time-input {
   width: 2em;
-  font-size: inherit;
+  font-size: 1.3em;
   text-align: center;
   padding: 0.3em 0;
+  border-radius: 5px;
+  
 }

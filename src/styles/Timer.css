@@ -9,15 +9,20 @@
 }
 
 .name-input {
-  padding: 0.5em 0;
+  padding: 0.4em 0.7em;
+  font-size: 1em;
+  font-weight: bold;
+  width: 75%;
+  border-radius: 7px;
 }
 .upper-button {
-  font-size: 1.5em;
+  font-size: 1.45em;
+  margin: 0.1em 0;
   font-weight: bolder;
   color: grey;
   border: none;
   background-color: inherit;
-  line-height: 1em;
+  line-height: 0;
 }
 
 .upper-button:hover {
@@ -25,9 +30,10 @@
 }
 
 .delete-button {
-  font-size: 1.75em;
+  font-size: 1.8em;
   line-height: 0;
   padding: 0;
+  margin: 0;
 }
 
 .middle-timer {
@@ -47,11 +53,18 @@
 .middle-timer, .lower-timer {
   text-align: center;
 }
-
+ 
 .progress-bar {
-  width: 100%; 
+  width: 100%;
+  height: 0.5em;
 }
+progress::-moz-progress-bar { background: blue; }
+progress::-webkit-progress-value { background: blue; }
 
+.timer-display {
+  font-size: 1.3em;
+  font-weight: bold;
+}
 .timer-display-finished {
   color: limegreen;
 }
