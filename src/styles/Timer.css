@@ -23,6 +23,7 @@
   border: none;
   background-color: inherit;
   line-height: 0;
+  transition: 0.15s;
 }
 
 .upper-button:hover {
@@ -53,13 +54,16 @@
 .middle-timer, .lower-timer {
   text-align: center;
 }
- 
+
+.lower-timer {
+  font-weight: bolder;
+}
 .progress-bar {
   width: 100%;
-  height: 0.5em;
-}
-progress::-moz-progress-bar { background: blue; }
-progress::-webkit-progress-value { background: blue; }
+  height: 1.3em;
+} 
+/* progress::-moz-progress-bar { background: blue; border-radius: 3px; border: 0;}
+progress::-webkit-progress-value { background: blue; border-radius: 3px; border: 0;}  */
 
 .timer-display {
   font-size: 1.3em;

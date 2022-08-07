@@ -8,7 +8,7 @@ body {
   color: #F0F0F0;
   font-family: sans-serif;
 }
-input, button, progress {
+input, button {
   background-color: inherit;
   color: inherit;
   font-family: inherit;
