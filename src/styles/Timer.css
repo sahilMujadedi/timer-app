@@ -4,10 +4,6 @@
   padding: 1rem;
 }
 
-.upper-timer {
-  
-}
-
 .name-input {
   padding: 0.4em 0.7em;
   font-size: 1em;
@@ -23,7 +19,7 @@
   border: none;
   background-color: inherit;
   line-height: 0;
-  transition: 0.15s;
+  transition: 0.10s;
 }
 
 .upper-button:hover {
@@ -62,11 +58,9 @@
   width: 100%;
   height: 1.3em;
 } 
-/* progress::-moz-progress-bar { background: blue; border-radius: 3px; border: 0;}
-progress::-webkit-progress-value { background: blue; border-radius: 3px; border: 0;}  */
 
 .timer-display {
-  font-size: 1.3em;
+  font-size: 1.4em;
   font-weight: bold;
 }
 .timer-display-finished {

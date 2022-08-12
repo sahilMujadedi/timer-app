@@ -1,0 +1,23 @@
+.navbar {
+  margin: 0;
+  padding: 0;
+  background-color: #2A2A2A;
+  border-bottom: #888888 solid 1px;
+}
+.navbar-items {
+  list-style-type: none;
+  margin: 0;
+  padding: 0.8em 0;
+  overflow: hidden;
+}
+.navbar-item {
+  font-size: 1em;
+  padding: 1em;
+  display: inline;
+  font-weight: bold;
+  margin-right: 1em;
+}
+.title {
+  font-weight: bolder;
+  font-size: 1.5em;
+}
