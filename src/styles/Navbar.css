@@ -17,6 +17,13 @@
   font-weight: bold;
   margin-right: 1em;
 }
+.navbar-link {
+  text-decoration: underline;
+  
+}
+.navbar-link a {
+  color: inherit;
+}
 .title {
   font-weight: bolder;
   font-size: 1.5em;
