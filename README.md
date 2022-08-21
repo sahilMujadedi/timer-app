@@ -6,6 +6,9 @@ A timer app for the browser created using ReactJS that aims for a clean UI and c
 
 <hr>
 
+##[Live Demo](https://sahilm.tk)
+The app is now live on https://sahilm.tk
+
 ## Features:
 - Multiple timers
 - Automatic saving of timer data
