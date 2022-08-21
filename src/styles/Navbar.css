@@ -28,3 +28,14 @@
   font-weight: bolder;
   font-size: 1.5em;
 }
+
+@media (max-width: 490px) {
+  .title {
+    display: block;
+  }
+  .navbar-items {
+    margin: 0;
+    padding-top: 0;
+    text-align: center;
+  }
+}

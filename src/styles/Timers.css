@@ -20,3 +20,14 @@
   text-align: center;
   font-size: 4em;
 }
+
+@media (max-width: 1150px) {
+  .tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 580px) {
+  .tiles {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
