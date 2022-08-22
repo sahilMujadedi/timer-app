@@ -35,3 +35,8 @@ Run
   ```npm start```
 to start server on localhost:3000 (on default configuration).
   
+## To-do:
+- Play a sound when timer is finished
+- About and Contact links
+- Bigger timer text without ruining look
+- Style finished timer
