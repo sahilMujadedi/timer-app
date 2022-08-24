@@ -39,7 +39,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
   let [secondsDisplay, setSecondsDisplay] = useState('00')
   let [finishedFlag, setFinishedFlag] = useState(false)
 
-  let [timerDisplayStyle, setTimerDisplayStyle] = useState('timer-display')
+  let [timerStyle, setTimerStyle] = useState('timer')
 
   // variable to check if the timer has been set.
   let [timerIsSet, setTimerIsSet] = useState(false)
@@ -103,7 +103,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
   const resetTimer = () => {
     setTimerGoing(false)
     setTimerIsSet(false)
-    setTimerDisplayStyle('timer-display')
+    setTimerStyle('timer')
     setFinishedFlag(false)
     setMinutesDisplay(padZeros(0))
     setSecondsDisplay(padZeros(0))
@@ -115,13 +115,13 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
     setFinishedFlag(true)
     setTimerGoing(false)
     setTimeLeft(TIMESHIFT+1)
-    setTimerDisplayStyle(timerDisplayStyle += ' timer-display-finished')
+    setTimerStyle(timerStyle += ' timer-finished')
     console.log('timerfinished')
   }
 
   
   return (
-    <div className="timer tile">
+    <div className={"timer tile" + " " + timerStyle}>
       <div className="upper-timer">
         {/* timer name */}
         <input type="text" value={timerName} placeholder="Timer Name" className="name-input" onChange={(e) => {
@@ -161,7 +161,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
         {timerIsSet &&
           <span>
             {timeLeft > TIMESHIFT
-              ? <p className={timerDisplayStyle}>{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
+              ? <p className="timer-display">{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
               : timerFinished()
             }
           </span>
