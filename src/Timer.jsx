@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import TimerInputs from './TimerInputs'
+import useAudio from './useAudio'
+import ringSound from './audio/Ring.wav'
 import {FaPause, FaPlay, FaUndoAlt, FaTimes} from 'react-icons/fa'
 import './styles/Timer.css'
 
@@ -46,6 +48,9 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
 
   // progress bar variable
   let [initialTimeLeft, setInitialTimeLeft] = useState(0)
+
+  // audio variable
+  const [audioPlaying, audioToggleOn, audioToggleOff] = useAudio(ringSound)
 
   // the meat of the timer
   // first checks if timer is set to see if it needs to reset the timeLeft
@@ -105,6 +110,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
     setTimerIsSet(false)
     setTimerStyle('timer')
     setFinishedFlag(false)
+    audioToggleOff()
     setMinutesDisplay(padZeros(0))
     setSecondsDisplay(padZeros(0))
     setHoursDisplay(padZeros(0))
@@ -116,6 +122,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
     setTimerGoing(false)
     setTimeLeft(TIMESHIFT+1)
     setTimerStyle(timerStyle += ' timer-finished')
+    audioToggleOn()
     console.log('timerfinished')
   }
 
