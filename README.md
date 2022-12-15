@@ -37,3 +37,4 @@ to start server on localhost:3000 (on default configuration).
   
 ## To-do:
 - About and Contact links
+- Stopwatch
