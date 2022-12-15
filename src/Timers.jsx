@@ -1,6 +1,6 @@
 import { useState, useLayoutEffect } from 'react'
 import Timer from './Timer'
-import {FaPlus} from 'react-icons/fa'
+import {FaPlus, FaStopwatch, FaHourglass} from 'react-icons/fa'
 import './styles/Timers.css'
 
 const Timers = () => {
@@ -17,7 +17,7 @@ const Timers = () => {
       savedTimers = JSON.parse(localStorage.getItem("localStoredTimers"))
     } else {
       savedTimers = [
-        {id: 0, seconds: 0, minutes: 1, hours: 0, timerName: ""}
+        {id: 0, seconds: 0, minutes: 1, hours: 0, timerName: "", timerType: "timer"}
       ]
     }
 
@@ -27,10 +27,10 @@ const Timers = () => {
     setId(id)
   }
   
-  const addNewTimer = () => {
+  const addNewTimer = (timerType) => {
     id++
     setId(id)
-    savedTimers.push({id: id, seconds: 0, minutes: 1, hours: 0, timerName: ""})
+    savedTimers.push({id: id, seconds: 0, minutes: 1, hours: 0, timerName: "", timerType: timerType})
     setSavedTimers(savedTimers)
     saveTimers()
   }
@@ -90,7 +90,12 @@ const Timers = () => {
       
 
       
-      <button onClick={addNewTimer} className="add-button tile pointer"><FaPlus /></button>
+      <div className="add-buttons tile">
+        <FaPlus class="add-icon" />
+        <br />
+        <button class="add-button pointer" title="Timer" onClick={()=>addNewTimer("timer")}><FaHourglass /></button>
+        <button class="add-button pointer" title="Stopwatch" onClick={()=>addNewTimer("stopwatch")}><FaStopwatch /></button>
+      </div>
       
 
     </div>
