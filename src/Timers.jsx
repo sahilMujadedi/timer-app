@@ -91,10 +91,10 @@ const Timers = () => {
 
       
       <div className="add-buttons tile">
-        <FaPlus class="add-icon" />
+        <FaPlus className="add-icon" />
         <br />
-        <button class="add-button pointer" title="Timer" onClick={()=>addNewTimer("timer")}><FaHourglass /></button>
-        <button class="add-button pointer" title="Stopwatch" onClick={()=>addNewTimer("stopwatch")}><FaStopwatch /></button>
+        <button className="add-button pointer" title="Timer" onClick={()=>addNewTimer("timer")}><FaHourglass /></button>
+        <button className="add-button pointer" title="Stopwatch" onClick={()=>addNewTimer("stopwatch")}><FaStopwatch /></button>
       </div>
       
 
