@@ -128,7 +128,7 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
 
   
   return (
-    <div className={"timer tile" + " " + timerStyle}>
+    <div className={"timer tile " + timerStyle}>
       <div className="upper-timer">
         {/* timer icon */}
         <span className="timer-icon"><FaHourglass /></span>

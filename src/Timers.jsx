@@ -1,5 +1,6 @@
 import { useState, useLayoutEffect } from 'react'
 import Timer from './Timer'
+import Stopwatch from './Stopwatch'
 import {FaPlus, FaStopwatch, FaHourglass} from 'react-icons/fa'
 import './styles/Timers.css'
 
@@ -76,19 +77,39 @@ const Timers = () => {
       
         {
           savedTimers.map((timer) => {
-            return (<Timer 
-              passedSeconds={timer.seconds} 
-              passedMinutes={timer.minutes} 
-              passedHours={timer.hours} 
-              passedName={timer.timerName} 
-              deleteTimer={deleteTimer} 
-              timerChangeHandler={timerChangeHandler} 
-              id={timer.id} 
-              key={timer.id}/>)
+            if (timer.timerType === "timer") {
+              return (
+                <Timer 
+                  passedSeconds={timer.seconds} 
+                  passedMinutes={timer.minutes} 
+                  passedHours={timer.hours} 
+                  passedName={timer.timerName} 
+                  deleteTimer={deleteTimer} 
+                  timerChangeHandler={timerChangeHandler} 
+                  id={timer.id} 
+                  key={timer.id}
+                />
+              )
+            } else if (timer.timerType === "stopwatch") {
+              return (
+                <Stopwatch 
+                  passedSeconds={timer.seconds} 
+                  passedMinutes={timer.minutes} 
+                  passedHours={timer.hours} 
+                  passedName={timer.timerName} 
+                  deleteTimer={deleteTimer} 
+                  timerChangeHandler={timerChangeHandler} 
+                  id={timer.id} 
+                  key={timer.id}
+                />
+              )
+            }
+            
           })
+          
         }
-      
 
+            
       
       <div className="add-buttons tile">
         <FaPlus className="add-icon" />
