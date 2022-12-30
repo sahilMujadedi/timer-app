@@ -2,7 +2,7 @@ import { useState } from 'react'
 import TimerInputs from './TimerInputs'
 import useAudio from './useAudio'
 import ringSound from './audio/Ring.wav'
-import {FaPause, FaPlay, FaUndoAlt, FaTimes} from 'react-icons/fa'
+import {FaPause, FaPlay, FaUndoAlt, FaTimes, FaHourglass} from 'react-icons/fa'
 import './styles/Timer.css'
 
 const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChangeHandler, deleteTimer, id}) => {
@@ -130,6 +130,8 @@ const Timer = ({passedSeconds, passedMinutes, passedHours, passedName, timerChan
   return (
     <div className={"timer tile" + " " + timerStyle}>
       <div className="upper-timer">
+        {/* timer icon */}
+        <span className="timer-icon"><FaHourglass /></span>
         {/* timer name */}
         <input type="text" value={timerName} placeholder="Timer Name" className="name-input" onChange={(e) => {
           timerChangeHandler(id, seconds, minutes, hours, e.target.value)
