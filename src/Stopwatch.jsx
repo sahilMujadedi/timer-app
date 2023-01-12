@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {FaPause, FaPlay, FaUndoAlt, FaTimes, FaStopwatch} from 'react-icons/fa'
 import './styles/Timer.css'
 
@@ -15,16 +15,16 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, timer
   let [timerName, setTimerName] = useState(passedName)
 
   // behind the scenes stopwatch variables
-  let [timeElapsed, setTimeElapsed] = useState(0)
+  let [timeElapsed, setTimeElapsed] = useState(1000*((passedSeconds) + (60*passedMinutes) + (3600*passedHours)))
   let [timerGoing, setTimerGoing] = useState(false)
   let [timerIntervalID, setTimerIntervalID] = useState(null)
 
   let lastUpdate = new Date().getTime()
 
   // display variables
-  let [hoursDisplay, setHoursDisplay] = useState('00')
-  let [minutesDisplay, setMinutesDisplay] = useState('00')
-  let [secondsDisplay, setSecondsDisplay] = useState('00')
+  let [hoursDisplay, setHoursDisplay] = useState(padZeros(passedHours))
+  let [minutesDisplay, setMinutesDisplay] = useState(padZeros(passedMinutes))
+  let [secondsDisplay, setSecondsDisplay] = useState(padZeros(passedSeconds))
 
   let [timerStyle, setTimerStyle] = useState('timer')
 
@@ -80,6 +80,12 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, timer
     setSecondsDisplay(padZeros(0))
     setHoursDisplay(padZeros(0))
   }
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", () => {
+      timerChangeHandler(id, parseInt(secondsDisplay), parseInt(minutesDisplay), parseInt(hoursDisplay), timerName)
+    })
+  })
 
   return (
     <div className={"timer tile " + timerStyle}>

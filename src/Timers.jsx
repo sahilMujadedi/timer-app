@@ -18,7 +18,14 @@ const Timers = () => {
       savedTimers = JSON.parse(localStorage.getItem("localStoredTimers"))
     } else {
       savedTimers = [
-        {id: 0, seconds: 0, minutes: 1, hours: 0, timerName: "", timerType: "timer"}
+        {
+          id: 0, 
+          seconds: 0, 
+          minutes: 1, 
+          hours: 0, 
+          timerName: "", 
+          timerType: "timer"
+        }
       ]
     }
 
@@ -31,7 +38,16 @@ const Timers = () => {
   const addNewTimer = (timerType) => {
     id++
     setId(id)
-    savedTimers.push({id: id, seconds: 0, minutes: 1, hours: 0, timerName: "", timerType: timerType})
+    savedTimers.push(
+      {
+        id: id, 
+        seconds: 0, 
+        minutes: 0, 
+        hours: 0, 
+        timerName: "", 
+        timerType: timerType
+      }
+    )
     setSavedTimers(savedTimers)
     saveTimers()
   }
