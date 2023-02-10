@@ -38,16 +38,31 @@ const Timers = () => {
   const addNewTimer = (timerType) => {
     id++
     setId(id)
-    savedTimers.push(
-      {
-        id: id, 
-        seconds: 0, 
-        minutes: 0, 
-        hours: 0, 
-        timerName: "", 
-        timerType: timerType
-      }
-    )
+    if (timerType === "timer") {
+      savedTimers.push(
+        {
+          id: id, 
+          seconds: 0, 
+          minutes: 0, 
+          hours: 0, 
+          timerName: "",
+          timerType: timerType
+        }
+      )
+    } else if (timerType === "stopwatch") {
+      savedTimers.push(
+        {
+          id: id, 
+          seconds: 0, 
+          minutes: 0, 
+          hours: 0, 
+          timerName: "",
+          laps: [],
+          timerType: timerType
+        }
+      )
+    }
+    
     setSavedTimers(savedTimers)
     saveTimers()
   }
@@ -64,7 +79,7 @@ const Timers = () => {
     saveTimers()
   }
 
-  const timerChangeHandler = (id, sec, min, hr, timerName) => {
+  const timerChangeHandler = (id, sec, min, hr, timerName, laps = []) => {
     if (sec > 59) {
       sec = 59
     }
@@ -77,6 +92,9 @@ const Timers = () => {
         savedTimers[i].minutes = min
         savedTimers[i].hours = hr
         savedTimers[i].timerName = timerName
+        if (savedTimers[i].timerType === "stopwatch") {
+          savedTimers[i].laps = laps;
+        }
         break
       }
     }
@@ -113,6 +131,7 @@ const Timers = () => {
                   passedMinutes={timer.minutes} 
                   passedHours={timer.hours} 
                   passedName={timer.timerName} 
+                  passedLaps={timer.laps}
                   deleteTimer={deleteTimer} 
                   timerChangeHandler={timerChangeHandler} 
                   id={timer.id} 

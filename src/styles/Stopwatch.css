@@ -1,0 +1,11 @@
+@import "./Timer.css";
+
+.timer-display {
+  margin: 0;
+}
+.laps-container {
+  background-color: #202020;
+  height: 50px;
+  overflow-y: auto;
+  border-radius: 5px;
+}

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import {FaPause, FaPlay, FaUndoAlt, FaTimes, FaStopwatch} from 'react-icons/fa'
-import './styles/Timer.css'
+import './styles/Stopwatch.css'
 
-const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, timerChangeHandler, deleteTimer, id}) => {
+const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, passedLaps, timerChangeHandler, deleteTimer, id}) => {
   const padZeros = (num) => {
     let s = num.toString()
     while (s.length < 2) {
@@ -25,6 +25,8 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, timer
   let [hoursDisplay, setHoursDisplay] = useState(padZeros(passedHours))
   let [minutesDisplay, setMinutesDisplay] = useState(padZeros(passedMinutes))
   let [secondsDisplay, setSecondsDisplay] = useState(padZeros(passedSeconds))
+
+  let [laps, setLaps] = useState(passedLaps)
 
   let [timerStyle, setTimerStyle] = useState('timer')
 
@@ -116,10 +118,6 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, timer
         
         
 
-        {/* progress bar */}
-        <div className='progress-bar-container'>
-          <progress value={((timeElapsed / 1000) % 3600) % 60} max={60} className="progress-bar" />
-        </div>
       </div>
 
       <div className="lower-timer">
@@ -127,6 +125,26 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, timer
           <span>
               <p className="timer-display">{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
           </span>
+          <div className="laps-container">
+            <table>
+              <tr>
+                <th>#</th>
+                <th>Time</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>01:00:00</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>01:00:00</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>01:00:00</td>
+              </tr>
+            </table>
+          </div>
       </div>
 
     </div>
