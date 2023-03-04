@@ -28,7 +28,7 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, passe
 
   let [laps, setLaps] = useState(passedLaps)
 
-  let [timerStyle, setTimerStyle] = useState('timer')
+  let [timerStyle, setTimerStyle] = useState('stopwatch')
 
   // variable to check if the timer has been set.
   let [timerIsSet, setTimerIsSet] = useState(false)
@@ -76,7 +76,7 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, passe
   const resetTimer = () => {
     setTimerGoing(false)
     setTimerIsSet(false)
-    setTimerStyle('timer')
+    setTimerStyle('stopwatch')
     setTimeElapsed(0)
     setMinutesDisplay(padZeros(0))
     setSecondsDisplay(padZeros(0))
@@ -90,11 +90,11 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, passe
   })
 
   return (
-    <div className={"timer tile " + timerStyle}>
-      <div className="upper-timer">
+    <div className={"stopwatch tile " + timerStyle}>
+      <div className="upper-stopwatch">
         {/* stopwatch icon */}
-        <span className="timer-icon"><FaStopwatch /></span>
-        {/* timer name */}
+        <span className="stopwatch-icon"><FaStopwatch /></span>
+        {/* stopwatch name */}
         <input type="text" value={timerName} placeholder="Timer Name" className="name-input" onChange={(e) => {
           timerChangeHandler(id, parseInt(secondsDisplay), parseInt(minutesDisplay), parseInt(hoursDisplay), e.target.value)
           setTimerName(e.target.value)
@@ -110,41 +110,43 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, passe
         }
       </div>
       
-      <div className="middle-timer">
+      <div className="middle-stopwatch">
+        
         {/* start/stop button */}
-        <div className="timer-toggle-container"> 
-          <button onClick={toggleStopwatch} className="timer-toggle pointer">{timerGoing ? <FaPause /> : <FaPlay />}</button>
+        <div className="stopwatch-toggle-container"> 
+          <button onClick={toggleStopwatch} className="stopwatch-toggle pointer">{timerGoing ? <FaPause /> : <FaPlay />}</button>
         </div>
+        <span>
+          <p className="stopwatch-display">{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
+        </span>
         
         
 
       </div>
 
-      <div className="lower-timer">
+      <div className="lower-stopwatch">
         {/* stopwatch display */}
-          <span>
-              <p className="timer-display">{hoursDisplay}:{minutesDisplay}:{secondsDisplay}</p>
-          </span>
-          <div className="laps-container">
-            <table>
-              <tr>
-                <th>#</th>
-                <th>Time</th>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>01:00:00</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>01:00:00</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>01:00:00</td>
-              </tr>
-            </table>
-          </div>
+          
+        <div className="laps-container">
+          <table>
+            <tr>
+              <th>#</th>
+              <th>Time</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>01:00:00</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>01:00:00</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>01:00:00</td>
+            </tr>
+          </table>
+        </div>
       </div>
 
     </div>

@@ -1,11 +1,93 @@
-@import "./Timer.css";
+.stopwatch {
+  position: relative;
+  display: block;
+  padding: 1rem;
+}
+.upper-stopwatch {
+  display: flex;
+  justify-content: space-between;
+}
+.stopwatch-icon {
+  float: left;
+  font-size: 1.8em;
+  line-height: 0;
+  padding: 0;
+  margin: 0.1em 0;
+  color: white;
+}
+.name-input {
+  padding: 0.4em 0.7em;
+  font-size: 1.1em;
+  font-weight: bold;
+  width: 10em;
+  border-radius: 7px;
+  background: transparent;
+  transition: 0.2s;
+  text-align: center;
+}
+.name-input:hover {
+  background: #202020;
+}
+.upper-button {
+  font-size: 1.45em;
+  margin: 0.1em 0;
+  font-weight: bolder;
+  color: grey;
+  border: none;
+  background-color: inherit;
+  line-height: 0;
+  transition: 0.10s;
+}
+.upper-button:hover {
+  color: white;
+}
 
-.timer-display {
+.delete-button {
+  font-size: 1.8em;
+  line-height: 0;
+  padding: 0;
   margin: 0;
+}
+
+.middle-stopwatch {
+  display: flex;
+  margin: 0.5em 0;
+  justify-content: space-around;
+  
+}
+
+.stopwatch-toggle {
+  font-size: 3em;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+  width: min-content;
+  padding: 0.3em;
+  border-radius: 50%;
+}
+
+.middle-stopwatch, .lower-stopwatch {
+  text-align: center;
+}
+.stopwatch-display {
+  font-size: 1.8em;
+  margin: 0.65em 0;
+}
+
+.flt-right {
+  float: right;
 }
 .laps-container {
   background-color: #202020;
-  height: 50px;
+  height: 4em;
+  width: 100%;
   overflow-y: auto;
   border-radius: 5px;
+  font-size: 1.2em;
+}
+.laps-container table {
+  width: 100%;
+}
+.laps-container tr:nth-child(even) {
+  background-color: #2C2C2C;
 }
