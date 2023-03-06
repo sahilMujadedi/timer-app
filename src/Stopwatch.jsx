@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import {FaPause, FaPlay, FaUndoAlt, FaTimes, FaStopwatch} from 'react-icons/fa'
+import {FaPause, FaPlay, FaUndoAlt, FaTimes, FaStopwatch, FaFlag} from 'react-icons/fa'
 import './styles/Stopwatch.css'
 
 const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, passedLaps, timerChangeHandler, deleteTimer, id}) => {
@@ -83,6 +83,11 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, passe
     setHoursDisplay(padZeros(0))
   }
 
+  const lapAction = () => {
+    laps.push(`${hoursDisplay}:${minutesDisplay}:${secondsDisplay}`)
+    setLaps(laps)
+  }
+
   useEffect(() => {
     setLaps(passedLaps);
     window.addEventListener("beforeunload", () => {
@@ -108,6 +113,9 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, passe
         }
         {!timerGoing && timerIsSet &&
           <button onClick={resetTimer} className="reset-button flt-right pointer upper-button"><FaUndoAlt /></button>
+        }
+        {timerGoing &&
+          <button onClick={lapAction} className="flt-right pointer upper-button"><FaFlag /></button>
         }
       </div>
       
@@ -142,7 +150,7 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, passe
                     <td>{lap}</td>
                   </tr>
                 )
-              })}
+              }).reverse()}
             </tbody>
           </table>
         </div>

@@ -11,6 +11,7 @@ The app is now live on https://sahilm.tk
 
 ## Features:
 - Multiple timers
+- Stopwatch with lap system
 - Automatic saving of timer data
 - Progress Bar
 - Nameable timers
@@ -37,4 +38,3 @@ to start server on localhost:3000 (on default configuration).
   
 ## To-do:
 - About and Contact links
-- Stopwatch
