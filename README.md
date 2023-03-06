@@ -6,8 +6,8 @@ A timer app for the browser created using ReactJS that aims for a clean UI and c
 
 <hr>
 
-## [Live Demo](https://sahilm.tk)
-The app is now live on https://sahilm.tk
+## Live Demo
+The app is now live on (whenever i get a domain)
 
 ## Features:
 - Multiple timers
@@ -37,4 +37,4 @@ Run
 to start server on localhost:3000 (on default configuration).
   
 ## To-do:
-- About and Contact links
+- Fix alignment issue on timer
