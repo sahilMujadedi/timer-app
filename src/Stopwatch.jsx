@@ -84,8 +84,9 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, passe
   }
 
   useEffect(() => {
+    setLaps(passedLaps);
     window.addEventListener("beforeunload", () => {
-      timerChangeHandler(id, parseInt(secondsDisplay), parseInt(minutesDisplay), parseInt(hoursDisplay), timerName)
+      timerChangeHandler(id, parseInt(secondsDisplay), parseInt(minutesDisplay), parseInt(hoursDisplay), timerName ? timerName : "", laps)
     })
   })
 
@@ -129,22 +130,20 @@ const Stopwatch = ({passedSeconds, passedMinutes, passedHours, passedName, passe
           
         <div className="laps-container">
           <table>
-            <tr>
-              <th>#</th>
-              <th>Time</th>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>01:00:00</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>01:00:00</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>01:00:00</td>
-            </tr>
+            <tbody>
+              <tr>
+                <th>#</th>
+                <th>Time</th>
+              </tr>
+              {laps.map((lap, indx) => {
+                return(
+                  <tr key={indx}>
+                    <td>{indx+1}</td>
+                    <td>{lap}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
           </table>
         </div>
       </div>
