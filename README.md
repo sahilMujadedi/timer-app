@@ -7,7 +7,7 @@ A timer app for the browser created using ReactJS that aims for a clean UI and c
 <hr>
 
 ## Live Demo
-The app is now live [here](timer-app-sahil.vercel.app).
+The app is now live [here](https://timer-app-sahil.vercel.app).
 
 ## Features:
 - Multiple timers
